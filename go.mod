@@ -1,4 +1,4 @@
-module mtdecoder
+module github.com/tomato3017/mineraltrackerdecoder
 
 go 1.16
 

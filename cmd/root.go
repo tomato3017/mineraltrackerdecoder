@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/subchen/go-log"
+	"github.com/tomato3017/mineraltrackerdecoder/pkg/mtdecoder"
 	"io"
-	"mtdecoder/pkg/mtdecoder"
 	"os"
 	"path"
 )
