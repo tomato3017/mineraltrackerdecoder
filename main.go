@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/subchen/go-log"
-	"mtdecoder/cmd"
+	"github.com/tomato3017/mineraltrackerdecoder/cmd"
 )
 
 func main() {
