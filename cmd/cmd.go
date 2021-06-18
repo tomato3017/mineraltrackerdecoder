@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/subchen/go-log"
 	"github.com/tomato3017/mineraltrackerdecoder/pkg/mtdecoder"
+	"github.com/tomato3017/mineraltrackerdecoder/pkg/util"
 	"io"
 	"os"
 	"path"
@@ -54,11 +55,12 @@ func runCMD(filename string) {
 	if err != nil {
 		log.Panic(err.Error())
 	}
-	defer file.Close()
+	defer util.SafeClose(file)
 
 	decoder, err := mtdecoder.NewMTDecoder(file)
 	if err != nil {
 		log.Panic(err.Error())
+		os.Exit(1)
 	}
 
 	entries := make([]mtdecoder.MTEntry, 0)
