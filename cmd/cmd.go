@@ -80,7 +80,7 @@ func runCMD(filename string) {
 
 	if options.outputCoords {
 		for _, entry := range entries {
-			PrintEntry(entry)
+			fmt.Println(entry)
 		}
 	}
 }
@@ -112,6 +112,8 @@ func getCloseEntry(entry mtdecoder.MTEntry, entryList []mtdecoder.MTEntry, dista
 	return mtdecoder.MTEntry{}, false
 }
 
-func PrintEntry(entry mtdecoder.MTEntry) {
-	fmt.Printf("%s: %d,%d\n", entry.Name, entry.CoordX, entry.CoordZ)
-}
+//func PrintEntry(entry mtdecoder.MTEntry) {
+//	str := []byte(fmt.Sprintf("%s: %d,%d\n", entry.Name, entry.CoordX, entry.CoordZ))
+//	var _ = str
+//	fmt.Printf("%s: %d,%d\n", entry.Name, entry.CoordX, entry.CoordZ)
+//}

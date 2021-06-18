@@ -17,7 +17,7 @@ type MTEntry struct {
 }
 
 func (e MTEntry) String() string {
-	return fmt.Sprintf("%s: %d,%d\n", e.Name, e.CoordX, e.CoordZ)
+	return fmt.Sprintf("%s: %d,%d", e.Name, e.CoordX, e.CoordZ)
 }
 
 func (e MTEntry) DistanceTo(entry MTEntry) float64 {
@@ -66,9 +66,9 @@ func GetMTEntryBytes(data []byte) ([]byte, error) {
 		//No more headers
 		return data[headerpos:], io.EOF
 	}
-	endPos = endPos + len(byteEntryStart)
 
-	return data[headerpos:endPos], nil
+	rtnData := data[headerpos:endPos]
+	return rtnData, nil
 }
 
 func HasValidEntryHeader(data []byte) bool {
