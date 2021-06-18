@@ -12,10 +12,10 @@ import (
 )
 
 var options struct {
-	debug          bool
-	outputCoords   bool
-	minDistance    int
-	filterDistance bool
+	debug            bool
+	outputCoords     bool
+	minDistance      int
+	noFilterDistance bool
 }
 
 var (
@@ -39,7 +39,7 @@ func init() {
 	p.BoolVar(&options.debug, "debug", false, "Set Debug mode")
 	p.BoolVar(&options.outputCoords, "output", true, "Toggle if we output the coords to stdout")
 
-	p.BoolVarP(&options.filterDistance, "filterdistance", "f", false, "Filters waypoints very close together")
+	p.BoolVarP(&options.noFilterDistance, "nofilterdistance", "n", false, "Disables filtering waypoints very close together")
 	p.IntVarP(&options.minDistance, "mindistance", "d", 50, "Filter the waypoints, only showing ones greater then specified distance")
 }
 
@@ -76,7 +76,7 @@ func runCMD(filename string) {
 		entries = append(entries, entry)
 	}
 
-	if options.filterDistance {
+	if !options.noFilterDistance {
 		entries = filterEntries(entries)
 	}
 
@@ -113,9 +113,3 @@ func getCloseEntry(entry mtdecoder.MTEntry, entryList []mtdecoder.MTEntry, dista
 
 	return mtdecoder.MTEntry{}, false
 }
-
-//func PrintEntry(entry mtdecoder.MTEntry) {
-//	str := []byte(fmt.Sprintf("%s: %d,%d\n", entry.Name, entry.CoordX, entry.CoordZ))
-//	var _ = str
-//	fmt.Printf("%s: %d,%d\n", entry.Name, entry.CoordX, entry.CoordZ)
-//}
