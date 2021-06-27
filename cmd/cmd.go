@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/subchen/go-log"
+	"github.com/tomato3017/mineraltrackerdecoder/pkg/jmapencoder"
 	"github.com/tomato3017/mineraltrackerdecoder/pkg/mtdecoder"
 	"github.com/tomato3017/mineraltrackerdecoder/pkg/util"
 	"io"
@@ -86,7 +87,8 @@ func runCMD(filename string) {
 	log.Debug("Opening file")
 	file, err := os.Open(path.Join(filename))
 	if err != nil {
-		log.Panic(err.Error())
+		log.Error(err.Error())
+		os.Exit(1)
 	}
 	defer util.SafeClose(file)
 
@@ -117,6 +119,18 @@ func runCMD(filename string) {
 		for _, entry := range entries {
 			fmt.Println(entry)
 		}
+	}
+
+	if options.exportToJourneymap {
+		jme, err := jmapencoder.NewJMapEncodeWriter(options.journeymapDir)
+		if err != nil {
+			log.Errorf("unable to encode jmap writer. Err: %w", err)
+		}
+
+		if err := jme.WriteOutJmapEntries(entries, true); err != nil {
+			log.Fatal("unable to write out entries to jmap. Err: %w", err)
+		}
+		log.Info("All waypoints written to jm waypoint files!")
 	}
 }
 

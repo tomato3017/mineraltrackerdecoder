@@ -5,24 +5,23 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+	"github.com/tomato3017/mineraltrackerdecoder/pkg/common"
 	"io"
 	"math"
 )
 
 type MTEntry struct {
-	CoordX int32
-	CoordY int32
-	CoordZ int32
+	Coords common.CoordXYZ
 	Name   string
 }
 
 func (e MTEntry) String() string {
-	return fmt.Sprintf("%s: %d,%d", e.Name, e.CoordX, e.CoordZ)
+	return fmt.Sprintf("%s: %d,%d", e.Name, e.Coords.X, e.Coords.Z)
 }
 
 func (e MTEntry) DistanceTo(entry MTEntry) float64 {
-	xdiff := math.Abs(float64(e.CoordX - entry.CoordX))
-	zdiff := math.Abs(float64(e.CoordZ - entry.CoordZ))
+	xdiff := math.Abs(float64(e.Coords.X - entry.Coords.X))
+	zdiff := math.Abs(float64(e.Coords.Z - entry.Coords.Z))
 
 	//Calculate the hypotenuse
 	distance := math.Hypot(xdiff, zdiff)
@@ -47,10 +46,12 @@ func GetMTEntryFromBytes(entryBytes []byte) (MTEntry, error) {
 	name := dataBytes[10:]
 
 	return MTEntry{
-		CoordX: convertHexToCoord(xCoord),
-		CoordY: 144,
-		CoordZ: convertHexToCoord(zCoord),
-		Name:   string(name),
+		Coords: common.CoordXYZ{
+			X: convertHexToCoord(xCoord),
+			Y: 144,
+			Z: convertHexToCoord(zCoord),
+		},
+		Name: string(name),
 	}, nil
 }
 
