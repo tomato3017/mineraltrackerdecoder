@@ -1,0 +1,18 @@
+{
+  "id": "High Copper_584,147,298",
+  "name": "High Copper",
+  "icon": "waypoint-normal.png",
+  "x": 584,
+  "y": 147,
+  "z": 298,
+  "r": 100,
+  "g": 68,
+  "b": 74,
+  "enable": false,
+  "type": "Normal",
+  "origin": "journeymap",
+  "dimensions": [
+    0
+  ],
+  "persistent": true
+}

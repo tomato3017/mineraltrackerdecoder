@@ -1,0 +1,18 @@
+{
+  "id": "Grain Production_-763,144,-1235",
+  "name": "Grain Production",
+  "icon": "waypoint-normal.png",
+  "x": -763,
+  "y": 144,
+  "z": -1235,
+  "r": 209,
+  "g": 151,
+  "b": 33,
+  "enable": false,
+  "type": "Normal",
+  "origin": "journeymap",
+  "dimensions": [
+    0
+  ],
+  "persistent": true
+}

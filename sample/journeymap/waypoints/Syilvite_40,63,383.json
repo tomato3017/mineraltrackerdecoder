@@ -1,0 +1,18 @@
+{
+  "id": "Syilvite_40,63,383",
+  "name": "Syilvite",
+  "icon": "waypoint-normal.png",
+  "x": 40,
+  "y": 63,
+  "z": 383,
+  "r": 121,
+  "g": 187,
+  "b": 187,
+  "enable": false,
+  "type": "Normal",
+  "origin": "journeymap",
+  "dimensions": [
+    0
+  ],
+  "persistent": true
+}

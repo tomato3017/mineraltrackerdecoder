@@ -9,13 +9,20 @@ import (
 	"io"
 	"os"
 	"path"
+	"path/filepath"
 )
 
 var options struct {
-	debug            bool
-	outputCoords     bool
-	minDistance      int
-	noFilterDistance bool
+	debug              bool
+	outputCoords       bool
+	minDistance        int
+	noFilterDistance   bool
+	exportToJourneymap bool
+	journeymapDir      string
+}
+
+var jmapvars struct {
+	resolvedPath string
 }
 
 var (
@@ -25,6 +32,14 @@ var (
 		Long:  "Parses the mineral tracker file passed in.",
 		Args:  cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
+			if options.debug {
+				log.Default.Level = log.DEBUG
+			}
+
+			if err := checkFlags(); err != nil {
+				log.Error(err.Error())
+				log.Fatal(cmd.Help().Error())
+			}
 			runCMD(args[0])
 		},
 	}
@@ -41,13 +56,31 @@ func init() {
 
 	p.BoolVarP(&options.noFilterDistance, "nofilterdistance", "n", false, "Disables filtering waypoints very close together")
 	p.IntVarP(&options.minDistance, "mindistance", "d", 50, "Filter the waypoints, only showing ones greater then specified distance")
+
+	p.BoolVar(&options.exportToJourneymap, "journeymapexport", false, "Enables journeymap export")
+	p.StringVar(&options.journeymapDir, "journeymapdir", "", "Journeymap directory")
+}
+
+func checkFlags() error {
+	if options.exportToJourneymap {
+		if options.journeymapDir == "" {
+			return fmt.Errorf("--journeymapdir not defined")
+		}
+
+		//resolve the path
+		absPath, err := filepath.Abs(options.journeymapDir)
+		if err != nil {
+			return fmt.Errorf("unable to resolve journeymap dir path. Err: %w", err)
+		}
+		jmapvars.resolvedPath = absPath
+		log.Debugf("journeymap resolved path is %s", jmapvars.resolvedPath)
+	}
+
+	return nil
 }
 
 //MT Decoder Runner
 func runCMD(filename string) {
-	if options.debug {
-		log.Default.Level = log.DEBUG
-	}
 	log.Info("Running MT Decoder")
 
 	log.Debug("Opening file")

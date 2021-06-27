@@ -1,0 +1,18 @@
+{
+  "id": "Halite_-257,160,49",
+  "name": "Halite",
+  "icon": "waypoint-normal.png",
+  "x": -257,
+  "y": 160,
+  "z": 49,
+  "r": 204,
+  "g": 91,
+  "b": 68,
+  "enable": false,
+  "type": "Normal",
+  "origin": "journeymap",
+  "dimensions": [
+    0
+  ],
+  "persistent": true
+}

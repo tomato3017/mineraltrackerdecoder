@@ -1,0 +1,18 @@
+{
+  "id": "Ore-Tin_-1487,152,-1291",
+  "name": "Ore-Tin",
+  "icon": "waypoint-normal.png",
+  "x": -1487,
+  "y": 152,
+  "z": -1291,
+  "r": 71,
+  "g": 190,
+  "b": 238,
+  "enable": false,
+  "type": "Normal",
+  "origin": "journeymap",
+  "dimensions": [
+    0
+  ],
+  "persistent": true
+}

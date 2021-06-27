@@ -1,0 +1,18 @@
+{
+  "id": "Kaolinite_-1116,145,480",
+  "name": "Kaolinite",
+  "icon": "waypoint-normal.png",
+  "x": -1116,
+  "y": 145,
+  "z": 480,
+  "r": 27,
+  "g": 180,
+  "b": 237,
+  "enable": false,
+  "type": "Normal",
+  "origin": "journeymap",
+  "dimensions": [
+    0
+  ],
+  "persistent": true
+}
